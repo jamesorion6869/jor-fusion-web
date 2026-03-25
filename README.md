@@ -25,16 +25,14 @@ The **JOR Bayesian Fusion Framework** combines historical UAP data with probabil
 - **SOP (Solid Object Probability):** Likelihood that an observed phenomenon corresponds to a physical object.  
 - **NHP (Non-Human Probability):** Likelihood that a phenomenon is of non-human origin, constrained by SOP evidence.  
 
-> In this web app, NHP is calculated relative to SOP for each case, following the logic established in **JOR Framework v2.0**.
+> In this web app, NHP is calculated relative to SOP for each case, following the logic established in **JOR Framework v3.0**.
 
 ---
 
 ## ⚙️ Features
 
 - Interactive case scoring using SOP/NHP metrics  
-- Bayesian posterior probability calculation  
-- Visualization of case results with charts  
-- Supports bulk import of historical case datasets  
+- Bayesian posterior probability calculation    
 - Lightweight, client-side web application (no backend required)  
 
 ---
@@ -50,10 +48,3 @@ The **JOR Bayesian Fusion Framework** combines historical UAP data with probabil
 ## 🛠️ Installation
 
 No installation required. The app is fully **client-side**. Simply open `index.html` in any modern browser.
-
-If you want to run locally with GitHub Pages:
-
-```bash
-git clone https://github.com/jamesorion6869/jor-fusion-web.git
-cd jor-fusion-web
-open index.html
