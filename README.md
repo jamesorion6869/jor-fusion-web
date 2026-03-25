@@ -13,10 +13,7 @@ Try the web application here:
 
 ## 📂 Repository Contents
 
-- `index.html` – Main web interface  
-- `styles.css` – Styling for the app  
-- `app.js` – JavaScript logic for calculations and visualization  
-- `data/` – Optional folder for CSV or JSON case datasets  
+- `index.html` – Main web interface
 - `README.md` – This file  
 
 ---
