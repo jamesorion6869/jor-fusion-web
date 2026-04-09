@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JOR Bayesian Fusion Framework v3</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.6.0/jspdf.plugin.autotable.min.js"></script>
 <style>
   :root {
     --bg: #0a0c0f;
@@ -781,10 +783,13 @@
     <div class="bayes-row"><span class="bayes-key">C Score</span><span class="bayes-val" id="r-c">—</span></div>
     <div class="bayes-row"><span class="bayes-key">E Score</span><span class="bayes-val" id="r-e">—</span></div>
     <div class="bayes-row" style="border-bottom:none;"><span class="bayes-key">P Score (final)</span><span class="bayes-val" id="r-p">—</span></div>
-    <div style="padding:12px;">
-      <button class="btn btn-sm" onclick="exportCSV()"><span>⬇ EXPORT CSV</span></button>
-      <button class="btn btn-sm btn-danger" onclick="clearLog()" style="margin-top:6px;"><span>✕ CLEAR LOG</span></button>
-    </div>
+    <div style="padding:12px; display: flex; flex-direction: column; gap: 6px;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+    <button class="btn btn-sm" onclick="exportCSV()"><span>⬇ CSV</span></button>
+    <button class="btn btn-sm" onclick="exportPDF()"><span>⬇ PDF</span></button>
+  </div>
+  <button class="btn btn-sm btn-danger" onclick="clearLog()"><span>✕ CLEAR LOG</span></button>
+</div>
   </div>
 
   <div class="panel">
@@ -1172,10 +1177,61 @@ function exportCSV(){
   showToast('CSV EXPORTED — '+state.log.length+' RECORDS');
 }
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
+async function exportPDF() {
+  if (!state.log.length) {
+    showToast('NO DATA TO EXPORT');
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'landscape' });
+  
+  const accentColor = [0, 212, 255]; // Cyan
+  const bgColor = [15, 19, 24];     // Dark Surface
+
+  doc.setFontSize(18);
+  doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
+  doc.text("JOR BAYESIAN FUSION FRAMEWORK - CASE LOG", 14, 20);
+  
+  doc.setFontSize(10);
+  doc.setTextColor(100);
+  doc.text(`Generated: ${new Date().toLocaleString()} | Methodology: James Orion`, 14, 28);
+
+  // 1. Added 'Notes' to the end of the headers
+  const headers = [['Case', 'C', 'E', 'P_raw', 'F_Mod', 'P_fin', 'SOP', 'NHP', 'Pr_NH', 'CalK', 'POST', 'Timestamp', 'Notes']];
+  
+  // 2. Added e.notes to the end of the row data
+  const rows = state.log.map(e => [
+    e.caseName,
+    e.C,
+    e.E,
+    e.P_raw,
+    e.flightMod,
+    e.P_final,
+    e.SOP,
+    e.NHP,
+    e.priorNH,
+    e.calK,
+    e.posterior,
+    e.timestamp || '',
+    e.notes || '' 
+  ]);
+
+  doc.autoTable({
+    startY: 35,
+    head: headers,
+    body: rows,
+    theme: 'grid',
+    headStyles: { fillColor: bgColor, textColor: accentColor, fontSize: 8 },
+    styles: { fontSize: 7, cellPadding: 2, overflow: 'linebreak' }, // Allowed text wrapping
+    columnStyles: {
+      10: { fontStyle: 'bold' }, // POST column (No yellow)
+      12: { cellWidth: 45 }      // Give 'Notes' column extra width
+    }
+  });
+
+  doc.save(`JOR_EXPORT_${new Date().getTime()}.pdf`);
+  showToast('PDF EXPORTED — ' + state.log.length + ' RECORDS');
 }
 
 
