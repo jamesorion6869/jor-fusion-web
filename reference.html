@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOR SYSTEM REFERENCE | CLASSIFIED</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #05070a;
+    --surface: #0a0e14;
+    --panel: #0d121b;
+    --accent: #00d4ff; 
+    --accent-glow: rgba(0, 212, 255, 0.3);
+    --warn: #ff6b35;
+    --text: #a0b4c8;
+    --text-bright: #eaf2fa;
+    --border: #1e2a3a;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow Condensed', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  /* Tactical Scanline Effect */
+  body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 1000;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+  }
+
+  header {
+    border-bottom: 1px solid var(--accent);
+    padding: 20px 40px;
+    background: var(--surface);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .intel-header h1 {
+    font-family: 'Share Tech Mono', monospace;
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent-glow);
+  }
+
+  .intel-status {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--warn);
+    text-transform: uppercase;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 25px;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+    margin-bottom: 20px;
+  }
+
+  .card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 10px; height: 10px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+  }
+
+  h2 {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--text-bright);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .repo-link {
+    display: block;
+    background: #161c27;
+    border: 1px solid var(--border);
+    padding: 15px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: var(--text);
+    transition: 0.3s;
+  }
+
+  .repo-link:hover {
+    background: var(--accent-glow);
+    border-color: var(--accent);
+    color: var(--text-bright);
+  }
+
+  .formula {
+    background: #000;
+    padding: 20px;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--accent);
+    border-radius: 4px;
+    margin: 20px 0;
+    font-size: 1.1rem;
+    border-left: 4px solid var(--warn);
+  }
+
+  .stat-label { color: var(--accent); font-weight: bold; }
+
+  footer {
+    text-align: center;
+    padding: 40px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="intel-header">
+    <h1>JOR BAYESIAN FUSION // SYSTEM REFERENCE HUB</h1>
+  </div>
+  <div class="intel-status">
+    <span style="color:var(--accent)">RESEARCH CORE</span> 
+    <span style="opacity:0.3; margin: 0 10px;">//</span> 
+    <span style="color:var(--warn)">MODE: TIER 1 ANALYSIS</span> 
+    <span style="opacity:0.3; margin: 0 10px;">//</span> 
+    <span style="color:var(--text)">PRIOR: 0.20 [K=0.20]</span>
+    <span style="opacity:0.3; margin: 0 10px;">//</span> 
+    <span style="color:var(--accent); font-size: 0.7rem; opacity: 0.8;">AARO-REF ALIGNED</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="grid">
+    
+    <div class="content-left">
+      <div class="card">
+        <h2><span style="color:var(--warn)">◈</span> FRAMEWORK LOGIC</h2>
+        <p>The JOR Framework employs a dual-stage Bayesian update model to separate the verification of physical presence from the hypothesis of origin.</p>
+        
+        <h3>SOLID OBJECT PROBABILITY (SOP)</h3>
+        <p>A baseline metric confirming physical reality before NHP (Non-Human Probability) analysis can commence.</p>
+        <div class="formula">SOP = (w1 * C) + (w2 * E) + (w3 * P)</div>
+
+        <h3>BAYESIAN UPDATE FUNCTION</h3>
+        <p>Updates posteriors based on AARO-aligned standards (Prior = 0.20).</p>
+        <div class="formula" style="border-left-color: var(--accent);">P(E|H) = min(1, 1 - NHP + (K * SOP))</div>
+        <p><span class="stat-label">CALIBRATION (K):</span> 0.20 // Prevents over-attribution under noisy sensor conditions.</p>
+      </div>
+
+      <div class="card" style="border-top: 2px solid var(--warn);">
+  <h2><span style="color:var(--accent)">◈</span> VERIFIED METHODOLOGY REPOS</h2>
+  <p>The formal research report is distributed across these verified hubs.</p>
+  
+  <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+    <a href="https://doi.org/10.5281/zenodo.18157347" class="repo-link" target="_blank" style="border-left: 4px solid var(--accent); margin-bottom:0;">
+      <strong>ZENODO ARCHIVAL DOI</strong><br>
+      <small>Primary Scientific DOI Record (V3)</small>
+    </a>
+
+    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6072706" class="repo-link" target="_blank" style="border-left: 4px solid #9b59b6; margin-bottom:0;">
+      <strong>SSRN RESEARCH NETWORK</strong><br>
+      <small>Professional Pre-print // ID: 6072706</small>
+    </a>
+
+    <a href="https://osf.io/tuh6m/files/5dhqu" class="repo-link" target="_blank" style="border-left: 4px solid #337ab7; margin-bottom:0;">
+      <strong>OSF OPEN SCIENCE FRAMEWORK</strong><br>
+      <small>Foundational Dataset & V2.0 Rubrics // DOI: 10.17605/OSF.IO/F6TRK</small>
+    </a>
+
+    <a href="https://www.academia.edu/145813577/James_Orion_Report_JOR_Bayesian_Fusion_Evidence_Driven_SOP_and_NHP_Analysis_of_UAP_Cases?sm=b" class="repo-link" target="_blank" style="border-left: 4px solid #34495e; margin-bottom:0;">
+      <strong>ACADEMIA.EDU HUB</strong><br>
+      <small>Global Researcher Access & Analytics</small>
+    </a>
+  </div>
+</div>
+    </div>
+
+    <div class="content-right">
+      <div class="card">
+        <h2><span style="color:var(--accent)">◈</span> SOFTWARE SUITE</h2>
+        
+        <a href="https://jamesorion6869.github.io/jor-fusion-web" class="repo-link">
+          <strong>JOR-FUSION-WEB</strong><br><small>Field Triage UI</small>
+        </a>
+
+        <a href="https://github.com/jamesorion6869/JOR-Framework-v3" class="repo-link">
+          <strong>JOR-FRAMEWORK-V3</strong><br><small>Python Logic Core</small>
+        </a>
+
+        <a href="https://github.com/jamesorion6869/JOR_Framework_PyMC" class="repo-link">
+          <strong>JOR-PYMC-ENGINE</strong><br><small>MCMC Scientific Engine</small>
+        </a>
+
+        <hr style="border:0; border-top:1px solid var(--border); margin: 20px 0;">
+        
+        <h3>ANALYTIC WEIGHTS</h3>
+        <p><span class="stat-label">Witness (C):</span> 0.40</p>
+        <p><span class="stat-label">Env (E):</span> 0.30</p>
+        <p><span class="stat-label">Sensor (P):</span> 0.30</p>
+      </div>
+      
+      <p style="text-align: center;"><a href="index.html" class="repo-link" style="background: var(--accent); color: #000; font-weight: bold; border:none;">◈ LAUNCH FUSION CORE</a></p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  JOR BAYESIAN FUSION FRAMEWORK // METHODOLOGY: JAMES ORION // IMPLEMENTATION: JAKE JAMES // 2026
+</footer>
+
+</body>
+</html>
