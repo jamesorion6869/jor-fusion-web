@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOR SYSTEM | MODEL VISUALS</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #05070a;
+    --surface: #0a0e14;
+    --panel: #0d121b;
+    --accent: #00d4ff; 
+    --accent-glow: rgba(0, 212, 255, 0.3);
+    --warn: #ff6b35;
+    --text: #a0b4c8;
+    --text-bright: #eaf2fa;
+    --border: #1e2a3a;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow Condensed', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 1000;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+  }
+
+  header {
+    border-bottom: 1px solid var(--accent);
+    padding: 20px 40px;
+    background: var(--surface);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .intel-header h1 {
+    font-family: 'Share Tech Mono', monospace;
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--accent);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+
+  .visual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 20px;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  }
+
+  h2 {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--text-bright);
+    font-size: 1.2rem;
+    border-left: 3px solid var(--accent);
+    padding-left: 10px;
+    margin-bottom: 20px;
+  }
+
+  .model-img {
+    width: 100%;
+    border: 1px solid #161c27;
+    filter: brightness(0.9) contrast(1.1);
+    transition: 0.3s;
+  }
+
+  .model-img:hover {
+    filter: brightness(1.1);
+    border-color: var(--accent);
+  }
+
+  .caption {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .btn-back {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    padding: 10px 25px;
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="intel-header">
+    <h1>JOR SYSTEM // MODEL VISUALS</h1>
+  </div>
+  <div class="intel-status" style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--warn);">
+    DATA_STREAM: VISUAL_ANALYTICS // TIER 1 ACCESS
+  </div>
+</header>
+
+<div class="container">
+  
+  <section>
+    <h2>◈ CASE ANALYSIS & COMPARISONS</h2>
+    <div class="visual-grid">
+      <div class="card">
+        <img src="images/Aguadilla 2013.png" alt="Aguadilla 2013 Bayesian Analysis" class="model-img">
+        <div class="caption">
+          <strong>FIG 01: AGUADILLA (2013) ANALYSIS</strong><br>
+          Displays Raw NHP (0.870) vs. Posterior Mean (0.449) against the 0.50 Undecided Threshold.
+        </div>
+      </div>
+      <div class="card">
+        <img src="images/Westall_Ariel.png" alt="Westall vs Ariel School Comparison" class="model-img">
+        <div class="caption">
+          <strong>FIG 02: CROSS-CASE STATISTICAL SIMILARITY</strong><br>
+          Comparative metrics for Westall (1966) and Ariel School (1994) showing near-identical Bayesian Posteriors (0.27).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>◈ GLOBAL DISTRIBUTION & CREDIBLE INTERVALS</h2>
+    <div class="card" style="margin-bottom: 40px;">
+      <img src="images/Posterior Means_Credibile Intervals.png" alt="JOR Analysis Posterior Means" class="model-img">
+      <div class="caption">
+        <strong>FIG 03: MULTI-CASE POSTERIOR MEANS</strong><br>
+        Comprehensive map of UAP incidents plotted against Probability Zones (Low/Medium/High) and the 0.20 Skeptical Baseline.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>◈ FRAMEWORK SENSITIVITY & ROBUSTNESS</h2>
+    <div class="visual-grid">
+      <div class="card">
+        <img src="images/Weight Sensitivity.png" alt="NHP Probability Across Scenarios" class="model-img">
+        <div class="caption">
+          <strong>FIG 04: SCENARIO WEIGHTING IMPACT</strong><br>
+          Visualizing how varying Credibility (C) and Physical (P) weights influences the final Posterior NHP.
+        </div>
+      </div>
+      <div class="card">
+        <img src="images/Weight Sensitivity2.png" alt="Scenario Analysis Table" class="model-img">
+        <div class="caption">
+          <strong>FIG 05: SENSITIVITY DATA MATRIX</strong><br>
+          Tabular breakdown of base scores and weights demonstrating framework robustness under extreme physical scenarios.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a href="reference.html" class="btn-back">◈ RETURN TO SYSTEM REFERENCE</a>
+</div>
+
+<footer>
+  JOR BAYESIAN FUSION FRAMEWORK // VISUAL DATA ARCHIVE // 2026
+</footer>
+
+</body>
+</html>
