@@ -171,6 +171,22 @@ V3.1 Update: Flight behavior is now modeled as a probabilistic distribution rath
 V3.1 Update: Credible intervals reflect the incorporation of stochastic flight anomaly modeling, where flight characteristics are treated as a bounded distribution rather than a deterministic input.
       </div>
     </div>
+
+    <div class="card">
+      <img src="images/sensitivity_analysis.png" alt="Sensitivity Analysis Using 3 Cases from a 50-Case UAP Dataset" class="model-img">
+      <div class="caption">
+        <strong>FIG 03: PRIOR SENSITIVITY & CONVERGENCE ANALYSIS</strong><br>
+        This test tracks how the resulting confidence (Posterior) responds to varying levels of initial skepticism (Prior 0.01 to 0.50).
+        <br><br>
+        <strong>EVIDENTIARY TIER ANALYSIS:</strong>
+        <ul style="margin-top: 10px; color: var(--text); border-left: 1px solid var(--accent); list-style: none; padding-left: 15px;">
+          <li><span style="color: var(--accent);">▷ TIER 1 (HIGH GAIN):</span> <em>USS Nimitz (2004)</em>. High-quality sensor data "overcomes" extreme skepticism, forcing a steep upward update in the posterior.</li>
+          <li><span style="color: var(--accent);">▷ TIER 2 (MODERATE):</span> <em>Socorro (1964)</em>. Displays "conservative anchoring"—requiring a higher initial prior to reach significant confidence zones.</li>
+          <li><span style="color: var(--accent);">▷ TIER 3 (LOW PRIORITY):</span> <em>Kandahar (2017)</em>. Tracks the baseline. The framework refuses to inflate probability when evidence signal is weak.</li>
+          <li><span style="color: var(--warn);">▷ ROBUSTNESS PROOF:</span> Confirms that the <strong>K=0.20 constant</strong> effectively biases the system against over-attribution unless the signal is exceptionally strong.</li>
+        </ul>
+      </div>
+    </div>
 </section>
 
 <header>
