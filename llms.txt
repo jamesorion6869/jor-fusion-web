@@ -1,0 +1,23 @@
+# JOR Web Fusion: UI & Scientific Validation Archive
+
+> The interactive front-end and visual evidence repository for the James Orion Report (JOR) Framework.
+
+## Core Interface
+- [index.html](index.html): Field-entry dashboard for deterministic scoring of Witness (C), Environmental (E), and Physical (P) data.
+- [reference.html](reference.html): Technical authority file defining analytic weights and evidentiary rubrics.
+- [modelvisuals.html](modelvisuals.html): Comprehensive visual archive of Bayesian model outputs, featuring chronological distributions and stress-test results.
+
+## Key Scientific Visuals (in modelvisuals.html)
+- **Ablation Stress Tests:** Measures the "Telemetry Premium" by quantifying the impact of sensor deprivation (e.g., USS Nimitz radar removal).
+- **Prior Sensitivity & Convergence:** Tracks how the Posterior responds to varying levels of initial skepticism (0.01 to 0.50).
+- **Correlation Matrix (N=50):** Illustrates statistical drivers of NH probability, identifying Physicality (0.86) as the primary influencer.
+- **Forest Plots:** Visualizes Posterior Means with 95% Credible Intervals across 50 historical cases (1947–2024).
+
+## Technical Architecture
+- **Framework Evolution:** Documentation of the shift from v3.0 (additive scoring) to v3.1 (evidence-conditioned stochastic modeling).
+- **Deterministic Triage:** Executes real-time scoring in the browser (JavaScript) without the computational overhead of the PyMC engine.
+- **Interoperability:** Serves as the data-collection point for batch processing in the [JOR_PYMC_V3_1](https://github.com/jamesorion6869/JOR_PYMC_V3_1) backend.
+
+## Links
+- [Live Deployment](https://jamesorion6869.github.io/jor-fusion-web)
+- [Methodology (Zenodo)](https://doi.org/10.5281/zenodo.18157347)
