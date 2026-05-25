@@ -39,7 +39,7 @@ The **JOR Bayesian Fusion Framework** combines historical UAP data with probabil
 
 ## 📖 References
 
-- **JOR Report Methodology:** [https://doi.org/10.5281/zenodo.18157347](https://doi.org/10.5281/zenodo.18157347)  
+- **JOR Report Methodology:** [https://doi.org/10.5281/zenodo.20368678](https://doi.org/10.5281/zenodo.20368678)  
 - **Python Implementation (PyMC):** [https://github.com/jamesorion6869/JOR_Framework_PyMC](https://github.com/jamesorion6869/JOR_Framework_PyMC)  
 - **Live Web App:** [https://jamesorion6869.github.io/jor-fusion-web](https://jamesorion6869.github.io/jor-fusion-web)  
 
