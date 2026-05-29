@@ -1165,7 +1165,7 @@ document.getElementById('confirm-modal').addEventListener('click', function(e) {
 // ── Export CSV ────────────────────────────────────────────────
 function exportCSV(){
   if(!state.log.length){showToast('NO DATA TO EXPORT');return;}
-  const h=['Case','C','E','P_raw','Flight_Mod','P_final','SOP','NHP','Prior_NH','Cal_K','Posterior_NH','Timestamp','Notes'];
+  const h=['Case','C','E','P','Flight_Mod','P_final','SOP','NHP','Prior_NH','Cal_K','Posterior_NH','Timestamp','Notes'];
   const rows=state.log.map(e=>[
     e.caseName,e.C,e.E,e.P_raw,e.flightMod,e.P_final,
     e.SOP,e.NHP,e.priorNH,e.calK,e.posterior,
@@ -1199,7 +1199,7 @@ async function exportPDF() {
   doc.text(`Generated: ${new Date().toLocaleString()} | Methodology: James Orion`, 14, 28);
 
   // 1. Added 'Notes' to the end of the headers
-  const headers = [['Case', 'C', 'E', 'P_raw', 'F_Mod', 'P_fin', 'SOP', 'NHP', 'Pr_NH', 'CalK', 'POST', 'Timestamp', 'Notes']];
+  const headers = [['Case', 'C', 'E', 'P', 'F_Mod', 'P_fin', 'SOP', 'NHP', 'Pr_NH', 'CalK', 'POST', 'Timestamp', 'Notes']];
   
   // 2. Added e.notes to the end of the row data
   const rows = state.log.map(e => [
