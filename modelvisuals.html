@@ -45,7 +45,7 @@
     pointer-events: none;
   }
 
-  header {
+  header.main-header {
     border-bottom: 1px solid var(--accent);
     padding: 20px 40px;
     background: var(--surface);
@@ -65,6 +65,19 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px;
+  }
+
+  .version-banner {
+    border-bottom: 1px dotted var(--border);
+    margin: 30px 0 20px 0;
+  }
+
+  .version-banner h2 {
+    color: var(--accent);
+    font-size: 1.5rem;
+    border-left: none;
+    padding-left: 0;
+    margin-bottom: 10px;
   }
 
   .visual-grid {
@@ -95,6 +108,7 @@
     border: 1px solid #161c27;
     filter: brightness(0.9) contrast(1.1);
     transition: 0.3s;
+    cursor: zoom-in;
   }
 
   .model-img:hover {
@@ -128,11 +142,68 @@
     font-size: 0.7rem;
     opacity: 0.5;
   }
+
+  /* RE-ENGINEERED VIEWPORT LIGHTBOX MODAL CORE STYLES */
+  .lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 5000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(5, 7, 10, 0.96);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .lightbox-content {
+    /* Optimization: Dynamically expands smaller structural dimensions to fill the workspace */
+    width: min(95vw, 1300px);
+    height: auto;
+    max-height: 82vh;
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 35px var(--accent-glow);
+    object-fit: contain;
+    background: var(--surface);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    color: var(--text-bright);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    background: rgba(13, 18, 27, 0.8);
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .lightbox-close:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+
+  .lightbox-caption {
+    position: absolute;
+    bottom: 25px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-align: center;
+    width: 100%;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+  }
 </style>
 </head>
 <body>
 
-<header>
+<header class="main-header">
   <div class="intel-header">
     <h1>JOR SYSTEM // MODEL VISUALS</h1>
   </div>
@@ -143,106 +214,133 @@
 
 <div class="container">
 
-<header>
-  <div class="intel-header">
-    <h2>JOR Version V3.1</h2>
+  <div class="version-banner">
+    <h2>// JOR Version V3.1</h2>
   </div>
-</header>
 
-<section>
-  <h2>◈ CASE ANALYSIS & COMPARISONS</h2>
-  <div class="visual-grid">
-    <div class="card">
-      <img src="images/JOR_V31_50case_chrono.png" alt="50 UAP Case Chronological" class="model-img">
-      <div class="caption">
-        <strong>FIG 01: Chronological 50 Cases - (1947-2024) </strong><br>
-        Displays the temporal distribution of 50 UAP cases analyzed under JOR V3.1 (1947–2024). Each case is plotted chronologically with corresponding Posterior NH values, illustrating long-term consistency in probabilistic outcomes.
-<br><br>
-V3.1 Update: Flight behavior is now modeled as a probabilistic distribution rather than a fixed modifier, introducing uncertainty-aware adjustments to Physicality (P) across all cases
+  <section>
+    <h2>◈ FUTURE-STATE UAP ARCHIVE & SIGNAL PIPELINE (V3.1)</h2>
+    <div class="visual-grid">
+      <div class="card">
+        <img src="images/jor_database.png" alt="FIG 0A: ARCHIVE INTEGRATION & END-TO-END DATAFLOW" class="model-img">
+        <div class="caption">
+          <strong>FIG 0A: ARCHIVE INTEGRATION & END-TO-END DATAFLOW</strong><br>
+          Structural map of the ingestion-to-output pipeline. Illustrates the initial Tier 1/Tier 2 classification filtering into weighted C, E, and P metrics (<span style="font-family: monospace; color: var(--accent);">w₁ = 0.40, w₂ = 0.30, w₃ = 0.30</span>). 
+          <br><br>
+          <strong>DATAFLOW REFINEMENT:</strong> Shows the deterministic SOP/NHP calculations passing into the core Bayesian update stage, which triggers the optional PyMC MCMC sampler (4 chains, 1000 draws). The stochastic flight effect is injected here via a Truncated Normal distribution (<span style="font-family: monospace; color: var(--warn);">μ = mod, σ = 0.03</span>) to spit out the finalized 95% credible intervals in <code style="color: var(--accent);">jor_scores.csv</code>.
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/jor_pipeline.png" alt="FIG 0B: PROBABILISTIC LOGIC & LIKELIHOOD ENGINE" class="model-img">
+        <div class="caption">
+          <strong>FIG 0B: PROBABILISTIC LOGIC & LIKELIHOOD ENGINE</strong><br>
+          Granular trace of signal processing through the framework's parallel logic blocks (Witness, Environmental, Sensor/Physical, and Flight Telemetry).
+          <br><br>
+          <strong>CRITICAL ARCHITECTURAL DISTINCTION:</strong> 
+          <ul style="margin-top: 10px; color: var(--text); border-left: 1px solid var(--accent); list-style: none; padding-left: 15px;">
+            <li><span style="color: var(--accent);">▷ SOP Engine:</span> Evaluates <em>"Does a solid object exist?"</em> utilizing pre-flight physical scores (<span style="font-family: monospace; color: var(--accent);">P_raw</span>).</li>
+            <li><span style="color: var(--accent);">▷ NHP Engine:</span> Evaluates <em>"Is the behavior non-human?"</em> by passing <span style="font-family: monospace; color: var(--accent);">P_raw</span> through a stochastic Flight Modifier block to yield <span style="font-family: monospace; color: var(--accent);">P_Anomalous</span>.</li>
+            <li><span style="color: var(--warn);">▷ Likelihood Bounds:</span> Explicitly maps how the conservative <span style="font-family: monospace; color: var(--warn);">K = 0.20</span> constant penalizes the human-made likelihood <span style="font-family: monospace; color: var(--text-bright);">P(E|H)</span> based on solid object probability, ensuring rigorous protection against narrative over-attribution.</li>
+          </ul>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="card">
-      <img src="images/JOR_V31_50case.png" alt="50 UAP Case Forest Plot" class="model-img">
-      <div class="caption">
-        <strong>FIG 02: Forest Plot of 50 UAP Cases - (1947-2024) </strong><br>
-        Forest plot visualization of 50 UAP cases showing Posterior Mean estimates with 95% credible intervals. This format highlights uncertainty bounds across cases and demonstrates how higher NHP values are typically associated with broader interval ranges.
-<br><br>
-V3.1 Update: Credible intervals reflect the incorporation of stochastic flight anomaly modeling, where flight characteristics are treated as a bounded distribution rather than a deterministic input.
+  <section>
+    <h2>◈ CASE ANALYSIS & COMPARISONS (V3.1)</h2>
+    <div class="visual-grid">
+      <div class="card">
+        <img src="images/JOR_V31_50case_chrono.png" alt="FIG 01: Chronological 50 Cases - (1947-2024)" class="model-img">
+        <div class="caption">
+          <strong>FIG 01: Chronological 50 Cases - (1947-2024) </strong><br>
+          Displays the temporal distribution of 50 UAP cases analyzed under JOR V3.1 (1947–2024). Each case is plotted chronologically with corresponding Posterior NH values, illustrating long-term consistency in probabilistic outcomes.
+          <br><br>
+          V3.1 Update: Flight behavior is now modeled as a probabilistic distribution rather than a fixed modifier, introducing uncertainty-aware adjustments to Physicality (P) across all cases.
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/JOR_V31_50case.png" alt="FIG 02: Forest Plot of 50 UAP Cases - (1947-2024)" class="model-img">
+        <div class="caption">
+          <strong>FIG 02: Forest Plot of 50 UAP Cases - (1947-2024) </strong><br>
+          Forest plot visualization of 50 UAP cases showing Posterior Mean estimates with 95% credible intervals. This format highlights uncertainty bounds across cases and demonstrates how higher NHP values are typically associated with broader interval ranges.
+          <br><br>
+          V3.1 Update: Credible intervals reflect the incorporation of stochastic flight anomaly modeling, where flight characteristics are treated as a bounded distribution rather than a deterministic input.
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/sensitivity_analysis.png" alt="FIG 03: PRIOR SENSITIVITY & CONVERGENCE ANALYSIS" class="model-img">
+        <div class="caption">
+          <strong>FIG 03: PRIOR SENSITIVITY & CONVERGENCE ANALYSIS</strong><br>
+          This test tracks how the resulting confidence (Posterior) responds to varying levels of initial skepticism (Prior 0.01 to 0.50).
+          <br><br>
+          <strong>EVIDENTIARY TIER ANALYSIS:</strong>
+          <ul style="margin-top: 10px; color: var(--text); border-left: 1px solid var(--accent); list-style: none; padding-left: 15px;">
+            <li><span style="color: var(--accent);">▷ TIER 1 (HIGH GAIN):</span> <em>USS Nimitz (2004)</em>. High-quality sensor data "overcomes" extreme skepticism, forcing a steep upward update in the posterior.</li>
+            <li><span style="color: var(--accent);">▷ TIER 2 (MODERATE):</span> <em>Socorro (1964)</em>. Displays "conservative anchoring"—requiring a higher initial prior to reach significant confidence zones.</li>
+            <li><span style="color: var(--accent);">▷ TIER 3 (LOW PRIORITY):</span> <em>Kandahar (2017)</em>. Tracks the baseline. The framework refuses to inflate probability when evidence signal is weak.</li>
+            <li><span style="color: var(--warn);">▷ ROBUSTNESS PROOF:</span> Confirms that the <strong>K=0.20 constant</strong> effectively biases the system against over-attribution unless the signal is exceptionally strong.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/Ablation_test.png" alt="FIG 04: ABLATION STRESS TEST (SENSOR DEPRIVATION)" class="model-img">
+        <div class="caption">
+          <strong>FIG 04: ABLATION STRESS TEST (SENSOR DEPRIVATION)</strong><br>
+          This test measures the "telemetry premium" by simulating the Nimitz case with all radar/instrument data removed, leaving only witness testimony.
+          <br><br>
+          <strong>STRESS TEST ANALYTICS:</strong>
+          <ul style="margin-top: 10px; color: var(--text); border-left: 1px solid var(--accent); list-style: none; padding-left: 15px;">
+            <li><span style="color: var(--accent);">▷ CONTROL (MULTI-SENSOR):</span> Baseline Posterior of <strong>0.439</strong> using radar telemetry + visual confirmation.</li>
+            <li><span style="color: var(--warn);">▷ ABLATED (VISUAL ONLY):</span> Dropping Physicality (P) from 0.90 to 0.40 crashes the Posterior to <strong>0.310</strong>.</li>
+            <li><span style="color: var(--accent);">▷ LOGIC VALIDATION:</span> The <strong>-0.129 delta</strong> proves the framework is evidence-dependent. It prevents "narrative inflation" by anchoring the result to the skeptical baseline when sensor data is absent.</li>
+          </ul>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="card">
-      <img src="images/sensitivity_analysis.png" alt="Sensitivity Analysis Using 3 Cases from a 50-Case UAP Dataset" class="model-img">
-      <div class="caption">
-        <strong>FIG 03: PRIOR SENSITIVITY & CONVERGENCE ANALYSIS</strong><br>
-        This test tracks how the resulting confidence (Posterior) responds to varying levels of initial skepticism (Prior 0.01 to 0.50).
-        <br><br>
-        <strong>EVIDENTIARY TIER ANALYSIS:</strong>
-        <ul style="margin-top: 10px; color: var(--text); border-left: 1px solid var(--accent); list-style: none; padding-left: 15px;">
-          <li><span style="color: var(--accent);">▷ TIER 1 (HIGH GAIN):</span> <em>USS Nimitz (2004)</em>. High-quality sensor data "overcomes" extreme skepticism, forcing a steep upward update in the posterior.</li>
-          <li><span style="color: var(--accent);">▷ TIER 2 (MODERATE):</span> <em>Socorro (1964)</em>. Displays "conservative anchoring"—requiring a higher initial prior to reach significant confidence zones.</li>
-          <li><span style="color: var(--accent);">▷ TIER 3 (LOW PRIORITY):</span> <em>Kandahar (2017)</em>. Tracks the baseline. The framework refuses to inflate probability when evidence signal is weak.</li>
-          <li><span style="color: var(--warn);">▷ ROBUSTNESS PROOF:</span> Confirms that the <strong>K=0.20 constant</strong> effectively biases the system against over-attribution unless the signal is exceptionally strong.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="images/Ablation_test.png" alt="Ablation Test: USS Nimitz Radar Removal" class="model-img">
-      <div class="caption">
-        <strong>FIG 04: ABLATION STRESS TEST (SENSOR DEPRIVATION)</strong><br>
-        This test measures the "telemetry premium" by simulating the Nimitz case with all radar/instrument data removed, leaving only witness testimony.
-        <br><br>
-        <strong>STRESS TEST ANALYTICS:</strong>
-        <ul style="margin-top: 10px; color: var(--text); border-left: 1px solid var(--accent); list-style: none; padding-left: 15px;">
-          <li><span style="color: var(--accent);">▷ CONTROL (MULTI-SENSOR):</span> Baseline Posterior of <strong>0.439</strong> using radar telemetry + visual confirmation.</li>
-          <li><span style="color: var(--warn);">▷ ABLATED (VISUAL ONLY):</span> Dropping Physicality (P) from 0.90 to 0.40 crashes the Posterior to <strong>0.310</strong>.</li>
-          <li><span style="color: var(--accent);">▷ LOGIC VALIDATION:</span> The <strong>-0.129 delta</strong> proves the framework is evidence-dependent. It prevents "narrative inflation" by anchoring the result to the skeptical baseline when sensor data is absent.</li>
-        </ul>
-      </div>
-    </div>
-</section>
-
-<header>
-  <div class="intel-header">
-    <h2>JOR Version V3.0</h2>
+  <div class="version-banner">
+    <h2>// JOR Version V3.0</h2>
   </div>
-</header>
-  
-<section>
-  <h2>◈ CASE ANALYSIS & COMPARISONS</h2>
-  <div class="visual-grid">
-    <div class="card">
-      <img src="images/Aguadilla 2013.png" alt="Aguadilla 2013 Bayesian Analysis" class="model-img">
-      <div class="caption">
-        <strong>FIG 01: AGUADILLA (2013) ANALYSIS</strong><br>
-        Displays Raw NHP (0.870) vs. Posterior Mean (0.449) against the 0.50 Undecided Threshold.
-      </div>
-    </div>
     
-    <div class="card">
-      <img src="images/Westall_Ariel.png" alt="Westall vs Ariel School Comparison" class="model-img">
-      <div class="caption">
-        <strong>FIG 02: CROSS-CASE STATISTICAL SIMILARITY</strong><br>
-        Comparative metrics for Westall (1966) and Ariel School (1994) showing near-identical Bayesian Posteriors (0.27).
+  <section>
+    <h2>◈ CASE ANALYSIS & COMPARISONS (V3.0)</h2>
+    <div class="visual-grid">
+      <div class="card">
+        <img src="images/Aguadilla 2013.png" alt="FIG 01: AGUADILLA (2013) ANALYSIS" class="model-img">
+        <div class="caption">
+          <strong>FIG 01: AGUADILLA (2013) ANALYSIS</strong><br>
+          Displays Raw NHP (0.870) vs. Posterior Mean (0.449) against the 0.50 Undecided Threshold.
+        </div>
       </div>
-    </div>
+      
+      <div class="card">
+        <img src="images/Westall_Ariel.png" alt="FIG 02: CROSS-CASE STATISTICAL SIMILARITY" class="model-img">
+        <div class="caption">
+          <strong>FIG 02: CROSS-CASE STATISTICAL SIMILARITY</strong><br>
+          Comparative metrics for Westall (1966) and Ariel School (1994) showing near-identical Bayesian Posteriors (0.27).
+        </div>
+      </div>
 
-    <div class="card">
-      <img src="images/DCFlap.png" alt="Washington D.C. 1952 Non-Human Probability Comparison" class="model-img">
-      <div class="caption">
-        <strong>FIG 03: WASHINGTON D.C. (1952) WAVE COMPARISON</strong><br>
-        Bayesian analysis of the two consecutive 1952 waves. Wave 2 (0.401) registers higher NHP than Wave 1 (0.291) with broader credible intervals.
+      <div class="card">
+        <img src="images/DCFlap.png" alt="FIG 03: WASHINGTON D.C. (1952) WAVE COMPARISON" class="model-img">
+        <div class="caption">
+          <strong>FIG 03: WASHINGTON D.C. (1952) WAVE COMPARISON</strong><br>
+          Bayesian analysis of the two consecutive 1952 waves. Wave 2 (0.401) registers higher NHP than Wave 1 (0.291) with broader credible intervals.
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <section>
     <h2>◈ GLOBAL DISTRIBUTION & CREDIBLE INTERVALS</h2>
     <div class="card" style="margin-bottom: 40px;">
-      <img src="images/Posterior Means_Credibile Intervals.png" alt="JOR Analysis Posterior Means" class="model-img">
+      <img src="images/Posterior Means_Credibile Intervals.png" alt="FIG 04: MULTI-CASE POSTERIOR MEANS" class="model-img">
       <div class="caption">
         <strong>FIG 04: MULTI-CASE POSTERIOR MEANS</strong><br>
         Comprehensive map of UAP incidents plotted against Probability Zones (Low/Medium/High) and the 0.20 Skeptical Baseline.
@@ -254,14 +352,14 @@ V3.1 Update: Credible intervals reflect the incorporation of stochastic flight a
     <h2>◈ FRAMEWORK SENSITIVITY & ROBUSTNESS</h2>
     <div class="visual-grid">
       <div class="card">
-        <img src="images/Weight Sensitivity.png" alt="NHP Probability Across Scenarios" class="model-img">
+        <img src="images/Weight Sensitivity.png" alt="FIG 05: SCENARIO WEIGHTING IMPACT" class="model-img">
         <div class="caption">
           <strong>FIG 05: SCENARIO WEIGHTING IMPACT</strong><br>
           Visualizing how varying Credibility (C) and Physical (P) weights influences the final Posterior NHP.
         </div>
       </div>
       <div class="card">
-        <img src="images/Weight Sensitivity2.png" alt="Scenario Analysis Table" class="model-img">
+        <img src="images/Weight Sensitivity2.png" alt="FIG 06: SENSITIVITY DATA MATRIX" class="model-img">
         <div class="caption">
           <strong>FIG 06: SENSITIVITY DATA MATRIX</strong><br>
           Tabular breakdown of base scores and weights demonstrating framework robustness under extreme physical scenarios.
@@ -273,7 +371,7 @@ V3.1 Update: Credible intervals reflect the incorporation of stochastic flight a
   <section>
     <h2>◈ BAYESIAN LEARNING (PRIOR VS. POSTERIOR)</h2>
     <div class="card" style="margin-bottom: 40px;">
-      <img src="images/prior_vs_posterior.png" alt="Nimitz Prior vs Posterior Update" class="model-img">
+      <img src="images/prior_vs_posterior.png" alt="FIG 07: CASE DEEP-DIVE (USS NIMITZ 2004)" class="model-img">
       <div class="caption">
         <strong>FIG 07: CASE DEEP-DIVE (USS NIMITZ 2004)</strong><br>
         This visual demonstrates the core robustness of the JOR-Fusion logic: the ability to update beliefs based on evidence.
@@ -286,12 +384,12 @@ V3.1 Update: Credible intervals reflect the incorporation of stochastic flight a
         </ul>
       </div>
     </div>
-</section>
+  </section>
 
-<section>
+  <section>
     <h2>◈ STATISTICAL INTERDEPENDENCE</h2>
     <div class="card" style="margin-bottom: 40px;">
-      <img src="images/correlationmatrix.png" alt="JOR Framework Correlation Matrix" class="model-img">
+      <img src="images/correlationmatrix.png" alt="FIG 08: CORRELATION MATRIX (N=50)" class="model-img">
       <div class="caption">
         <strong>FIG 08: CORRELATION MATRIX (N=50)</strong><br>
         A statistical breakdown of how JOR inputs drive the PyMC Bayesian outputs across the 50-case dataset.
@@ -302,12 +400,45 @@ V3.1 Update: Credible intervals reflect the incorporation of stochastic flight a
           <li><span style="color: var(--accent);">▷ ENVIRONMENTAL VARIANCE:</span> <strong>Environmental Conditions (0.46)</strong> show the weakest correlation. This suggests that while clear visibility is preferred, the model prioritizes "high-strangeness" physical data (P) over simply having ideal observation conditions (E).</li>
           <li><span style="color: var(--accent);">▷ UNCERTAINTY SCALING:</span> A <strong>0.97 correlation</strong> exists between Probability and Uncertainty Width; as the "Non-Human" likelihood increases, the model's range of probable outcomes naturally expands, reflecting the complexity of top-tier cases.</li>
         </ul>
-      </div> </div> </section>
+      </div>
+    </div> 
+  </section>
 
   <a href="reference.html" class="btn-back">◈ RETURN TO SYSTEM REFERENCE</a>
-</div> <footer>
+</div> 
+
+<div id="imageLightbox" class="lightbox-modal">
+  <span class="lightbox-close" id="closeLightbox">◈ CLOSE VISUAL</span>
+  <img class="lightbox-content" id="lightboxTarget" alt="Enlarged System Graphic">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<footer>
   JOR BAYESIAN FUSION FRAMEWORK // VISUAL DATA ARCHIVE // 2026
 </footer>
+
+<script>
+  const modal = document.getElementById("imageLightbox");
+  const modalImg = document.getElementById("lightboxTarget");
+  const captionText = document.getElementById("lightboxCaption");
+  const closeBtn = document.getElementById("closeLightbox");
+
+  document.querySelectorAll('.model-img').forEach(img => {
+    img.addEventListener('click', function() {
+      modal.style.display = "flex";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    });
+  });
+
+  closeBtn.addEventListener('click', () => { modal.style.display = "none"; });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) { modal.style.display = "none"; }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape" && modal.style.display === "flex") { modal.style.display = "none"; }
+  });
+</script>
 
 </body>
 </html>
