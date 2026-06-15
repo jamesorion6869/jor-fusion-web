@@ -20,4 +20,4 @@
 
 ## Links
 - [Live Deployment](https://jamesorion6869.github.io/jor-fusion-web)
-- [Methodology (Zenodo)](https://doi.org/10.5281/zenodo.20368678)
+- [Methodology (Zenodo)](https://doi.org/10.5281/zenodo.18088931)
