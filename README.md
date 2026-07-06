@@ -1,5 +1,8 @@
 # JOR Bayesian Fusion Web Application
 
+![Status](https://img.shields.io/badge/Status-Project_Complete-brightgreen.svg)  
+**Version:** 3.1 Final Release
+
 A web-based implementation of the **James Orion Report (JOR) Bayesian Fusion Framework** for analyzing historical UAP (Unidentified Aerial Phenomena) cases using **Solid Object Probability (SOP)** and **Non-Human Probability (NHP)** metrics.
 
 ---
