@@ -50,3 +50,7 @@ The **JOR Bayesian Fusion Framework** combines historical UAP data with probabil
 ## 🛠️ Installation
 
 No installation required. The app is fully **client-side**. Simply open `index.html` in any modern browser.
+
+## License
+
+[MIT](LICENSE) — Copyright (c) 2026 Jake James
