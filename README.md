@@ -53,4 +53,4 @@ No installation required. The app is fully **client-side**. Simply open `index.h
 
 ## License
 
-[MIT](LICENSE) — Copyright (c) 2026 Jake James
+[MIT](LICENSE.txt) — Copyright (c) 2026 Jake James
